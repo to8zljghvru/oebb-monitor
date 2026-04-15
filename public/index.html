@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scotty-style Departures</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand-mark">ÖBB</div>
+        <div class="brand-title">SCOTTY</div>
+      </header>
+
+      <nav class="nav-tabs" aria-label="Main navigation">
+        <button class="nav-tab">Fahrplan</button>
+        <button class="nav-tab nav-tab-active">Abfahrten</button>
+        <button class="nav-tab">Streckeninfo</button>
+      </nav>
+
+      <main class="content">
+        <section class="search-panel">
+          <div class="section-header">
+            <span class="section-title">Übersicht</span>
+            <span class="section-meta" id="clockLabel">Live</span>
+          </div>
+
+          <form id="searchForm" class="search-form">
+            <div class="provider-switch" role="tablist" aria-label="Provider">
+              <button type="button" class="provider-pill provider-pill-active" data-provider="oebb">
+                ÖBB
+              </button>
+              <button type="button" class="provider-pill" data-provider="wl">
+                Wiener Linien
+              </button>
+            </div>
+
+            <label class="field-label" for="targetInput">Station / Stop</label>
+            <div class="autocomplete-wrap">
+              <input
+                id="targetInput"
+                name="target"
+                type="text"
+                class="search-input"
+                placeholder="e.g. Wien Hbf (Bahnsteige 3-12)"
+                autocomplete="off"
+                required
+              />
+              <div id="autocompleteList" class="autocomplete-list" hidden></div>
+            </div>
+
+            <div class="search-grid">
+              <label class="field-stack">
+                <span class="field-label">Results</span>
+                <input id="limitInput" type="number" min="1" max="12" value="5" class="mini-input" />
+              </label>
+
+              <div class="field-stack">
+                <span class="field-label">Info</span>
+                <p class="helper-text" id="helperText">
+                  Search an ÖBB station by name. Switch to Wiener Linien to use a numeric stopId.
+                </p>
+              </div>
+            </div>
+
+            <button type="submit" class="search-button">Suchen</button>
+          </form>
+        </section>
+
+        <section class="results-panel">
+          <div class="results-head">
+            <div>
+              <p class="results-kicker">Abfahrten</p>
+              <h1 id="resultsTitle">Ready to search</h1>
+            </div>
+            <div class="status-badge" id="statusBadge">Idle</div>
+          </div>
+
+          <div class="results-table-head">
+            <span>Departure</span>
+            <span>Arrival</span>
+            <span>Line</span>
+            <span>Location</span>
+          </div>
+
+          <div id="resultsList" class="results-list">
+            <article class="empty-state">
+              <p>Search for a station to load live departures and arrivals.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
