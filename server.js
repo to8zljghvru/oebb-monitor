@@ -1,4 +1,4 @@
-const http = require("http");
+const http = require("http"); 
 const fs = require("fs");
 const path = require("path");
 const { spawn } = require("child_process");
@@ -104,8 +104,14 @@ function serveStatic(requestPath, response) {
 const server = http.createServer(async (request, response) => {
   const url = new URL(request.url, `http://${request.headers.host}`);
 
+  // Health check endpoint
   if (request.method === "GET" && url.pathname === "/health") {
-    sendJson(response, 200, { ok: true });
+    response.writeHead(200, {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "no-store",
+    });
+
+    response.end("ok");
     return;
   }
 
